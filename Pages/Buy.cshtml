@@ -1,0 +1,34 @@
+﻿@page
+@model Mission9_awinder7.Pages.BuyModel
+@{
+}
+
+<h2>Your Basket</h2>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <th>Title:</th>
+        <th>Quantity:</th>
+        <th>Cost:</th>
+        <th>Subtotal:</th>
+    </thead>
+    <tbody>
+       @foreach(var i in Model.basket.Items)
+            {
+                <tr >
+                    <td class="text-secondary">@i.Book.Title</td>
+                    <td class="text-secondary">@i.Quantity</td>
+                    <td class="text-secondary">@i.Book.Price</td>
+                    <td class="text-secondary">@(i.Quantity * i.Book.Price)</td>
+                </tr>
+            }
+    </tbody>
+    <tfoot>
+        <tr class="text-black">
+            <td colspan="3">Total:</td>
+            <td>@Model.basket.CalculateTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table> 
+<diiv>
+    <a class="btn btn-success" style="float:right" href="@Model.ReturnUrl">Continue Shopping</a>
+</diiv>
