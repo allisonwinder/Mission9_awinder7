@@ -6,21 +6,30 @@
 <h2>Your Basket</h2>
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
-        <th>Title:</th>
-        <th>Quantity:</th>
-        <th>Cost:</th>
-        <th>Subtotal:</th>
+    <th>Title:</th>
+    <th>Quantity:</th>
+    <th>Cost:</th>
+    <th>Subtotal:</th>
     </thead>
+
     <tbody>
-       @foreach(var i in Model.basket.Items)
-            {
-                <tr >
-                    <td class="text-secondary">@i.Book.Title</td>
-                    <td class="text-secondary">@i.Quantity</td>
-                    <td class="text-secondary">@i.Book.Price</td>
-                    <td class="text-secondary">@(i.Quantity * i.Book.Price)</td>
-                </tr>
-            }
+        @foreach (var i in Model.basket.Items)
+        {
+            <tr>
+                <td class="text-secondary">@i.Book.Title</td>
+                <td class="text-secondary">@i.Quantity</td>
+                <td class="text-secondary">@(i.Book.Price.ToString("c"))</td>
+                <td class="text-secondary">@((i.Quantity * i.Book.Price).ToString("c"))</td>
+
+                <td class="text-center">
+                    <form method="post" asp-page-handler="Remove">
+                        <input type="hidden" name="bookId" value="@i.Book.BookId" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
     <tfoot>
         <tr class="text-black">
@@ -31,4 +40,5 @@
 </table> 
 <diiv>
     <a class="btn btn-success" style="float:right" href="@Model.ReturnUrl">Continue Shopping</a>
+    <a class="btn btn-success" asp-action="Checkout" asp-controller="CheckoutBag">Checkout</a>
 </diiv>

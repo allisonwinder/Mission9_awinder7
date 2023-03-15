@@ -20,6 +20,7 @@ namespace Mission9_awinder7.Models
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<CheckoutBag> CheckoutBags { get; set; }
 
     }
 }
